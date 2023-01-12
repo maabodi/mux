@@ -1,0 +1,32 @@
+
+INSERT INTO `w_provinsis` VALUES (1,'Jawa Barat');
+INSERT INTO `w_provinsis` VALUES (2,'DKI Jakarta');
+INSERT INTO `w_kota` VALUES (1,'Bandung',1);
+INSERT INTO `w_kota` VALUES (2,'Bogor',1);
+INSERT INTO `w_kota` VALUES (3,'Jakarta Selatan',2);
+INSERT INTO `w_kota` VALUES (4,'Jakarta Utara',2);
+INSERT INTO `w_kecamatans` VALUES (1,'Ujung Berung',1);
+INSERT INTO `w_kecamatans` VALUES (2,'Gede Bage',1);
+INSERT INTO `w_kecamatans` VALUES (3,'Bogor Tengah',2);
+INSERT INTO `w_kecamatans` VALUES (4,'Bogor Selatan',2);
+INSERT INTO `w_kecamatans` VALUES (5,'Tebet',3);
+INSERT INTO `w_kecamatans` VALUES (6,'Setiabudi',3);
+INSERT INTO `w_kecamatans` VALUES (7,'Koja',4);
+INSERT INTO `w_kecamatans` VALUES (8,'Kelapa Gading',4);
+
+INSERT INTO `w_kelurahans` VALUES (1,'Passanggrahan',1);
+INSERT INTO `w_kelurahans` VALUES (2,'Pasir Jati',1);
+INSERT INTO `w_kelurahans` VALUES (3,'Cimincrang',2);
+INSERT INTO `w_kelurahans` VALUES (4,'Rancabolang',2);
+INSERT INTO `w_kelurahans` VALUES (5,'Paledang',3);
+INSERT INTO `w_kelurahans` VALUES (6,'Ciwaringin',3);
+INSERT INTO `w_kelurahans` VALUES (7,'Cikaret',4);
+INSERT INTO `w_kelurahans` VALUES (8,'Cipaku',4);
+INSERT INTO `w_kelurahans` VALUES (9,'Bukit Duri',5);
+INSERT INTO `w_kelurahans` VALUES (10,'Maggarai',5);
+INSERT INTO `w_kelurahans` VALUES (11,'Pasar Manggis',6);
+INSERT INTO `w_kelurahans` VALUES (12,'Kuningan Timur',6);
+INSERT INTO `w_kelurahans` VALUES (13,'Tugu Selatan',7);
+INSERT INTO `w_kelurahans` VALUES (14,'Tugu Utara',7);
+INSERT INTO `w_kelurahans` VALUES (15,'Kelapa Gading Barat',8);
+INSERT INTO `w_kelurahans` VALUES (16,'Kelapa Gading Timur',8);
