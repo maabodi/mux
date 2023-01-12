@@ -16,19 +16,6 @@ func ConnectDatabase() {
 		panic(err)
 	}
 
-	db.Create(&model.Role{
-		RoleId:   1,
-		RoleName: "User",
-	})
-	db.Create(&model.Role{
-		RoleId:   2,
-		RoleName: "Operator",
-	})
-	db.Create(&model.Role{
-		RoleId:   3,
-		RoleName: "Admin",
-	})
-
 	db.AutoMigrate(
 		&model.User{},
 		&model.Role{},
@@ -42,5 +29,17 @@ func ConnectDatabase() {
 		&model.WKelurahan{},
 	)
 
+	db.Create(&model.Role{
+		RoleId:   1,
+		RoleName: "user",
+	})
+	db.Create(&model.Role{
+		RoleId:   2,
+		RoleName: "operator",
+	})
+	db.Create(&model.Role{
+		RoleId:   3,
+		RoleName: "admin",
+	})
 	DB = db
 }

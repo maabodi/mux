@@ -52,7 +52,7 @@ func IndexPage(w http.ResponseWriter, r *http.Request) {
 
 	res := []model.Activity{}
 
-	if err := data.DB.Limit(limit).Offset(offset).Find(&res).Error; err != nil {
+	if err := data.DB.Order("time desc").Limit(limit).Offset(offset).Find(&res).Error; err != nil {
 		ResponseError(w, http.StatusInternalServerError, map[string]interface{}{
 			"code":    http.StatusInternalServerError,
 			"message": "Error",

@@ -45,6 +45,8 @@ func ConfigureRouter() *mux.Router {
 	// news route
 	router.HandleFunc("/api/news/all/{limit}/{offset}", nc.IndexNews).Methods("GET")
 	router.Handle("/api/news/{id}", helper.AuthMiddleware(nc.ShowNews)).Methods("GET")
+	router.Handle("/api/news/{id}", helper.AuthMiddleware(nc.UpdateNews)).Methods("PUT")
+	router.Handle("/api/news/{id}", helper.AuthMiddleware(nc.DeleteNews)).Methods("DELETE")
 	router.Handle("/api/news", helper.AuthMiddleware(nc.CreateNews)).Methods("POST")
 	router.HandleFunc("/api/news/s/{keyword}", nc.SearchNews).Methods("GET")
 	router.HandleFunc("/api/news/check/limit", nc.GetNewsLimit).Methods("GET")

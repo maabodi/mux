@@ -146,6 +146,83 @@ var CreateNews = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	return
 })
 
+var UpdateNews = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	if Roleset != "operator" {
+		ResponseError(w, http.StatusUnauthorized, map[string]interface{}{
+			"code":    http.StatusUnauthorized,
+			"message": "Error",
+		})
+		return
+	}
+
+	vars := mux.Vars(r)
+	id, err := strconv.ParseInt(vars["id"], 10, 64)
+	if err != nil {
+		ResponseError(w, http.StatusBadRequest, map[string]interface{}{
+			"code":    http.StatusBadRequest,
+			"message": "Error",
+		})
+		return
+	}
+
+	// Get title and content from form
+	title := r.FormValue("title")
+	content := r.FormValue("content")
+
+	if err := data.DB.Where("news_id = ?", id).Updates(model.News{
+		Title:   title,
+		Content: content,
+	}).Error; err != nil {
+		ResponseError(w, http.StatusInternalServerError, map[string]interface{}{
+			"code":    http.StatusInternalServerError,
+			"message": "Error",
+		})
+		return
+	}
+
+	ResponseJson(w, http.StatusOK, map[string]interface{}{
+		"code":    http.StatusOK,
+		"message": "Success",
+	})
+
+	return
+})
+
+var DeleteNews = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	if Roleset != "operator" {
+		ResponseError(w, http.StatusUnauthorized, map[string]interface{}{
+			"code":    http.StatusUnauthorized,
+			"message": "Error",
+		})
+		return
+	}
+
+	vars := mux.Vars(r)
+	id, err := strconv.ParseInt(vars["id"], 10, 64)
+	if err != nil {
+		ResponseError(w, http.StatusBadRequest, map[string]interface{}{
+			"code":    http.StatusBadRequest,
+			"message": "Error",
+		})
+		return
+	}
+
+	var res model.News
+	if data.DB.Delete(&res, id).RowsAffected == 0 {
+		ResponseError(w, http.StatusInternalServerError, map[string]interface{}{
+			"code":    http.StatusInternalServerError,
+			"message": "Error",
+		})
+		return
+	}
+
+	ResponseJson(w, http.StatusOK, map[string]interface{}{
+		"code":    http.StatusOK,
+		"message": "Success",
+	})
+	return
+})
+
 func SearchNews(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	keyword := params["keyword"]
@@ -169,7 +246,7 @@ func SearchNews(w http.ResponseWriter, r *http.Request) {
 func GetNewsLimit(w http.ResponseWriter, r *http.Request) {
 	res := []model.News{}
 
-	if err := data.DB.Select("created_at, SUBSTRING(`title`, 1, 10) as title, content, thumbnail ").Order("created_at DESC").Find(&res).Error; err != nil {
+	if err := data.DB.Select("created_at, SUBSTRING(`title`, 1, 50) as title, SUBSTRING(`content`, 1, 50) as content, thumbnail ").Order("created_at DESC").Find(&res).Error; err != nil {
 		ResponseError(w, http.StatusInternalServerError, map[string]interface{}{
 			"code":    http.StatusInternalServerError,
 			"message": "Error",

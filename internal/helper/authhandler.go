@@ -38,7 +38,7 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var get_user model.User
-	if err := data.DB.Where("email = ?", user.Email).Find(&get_user).Error; err != nil {
+	if err := data.DB.Where("email = ?", user.Email).Preload("Role").Find(&get_user).Error; err != nil {
 		switch err {
 		case gorm.ErrRecordNotFound:
 			ResponseError(w, http.StatusNotFound, map[string]interface{}{
@@ -84,7 +84,7 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 				"data": map[string]interface{}{
 					"user": map[string]interface{}{
 						"email": get_user.Email,
-						"role":  get_user.Role,
+						"role":  get_user.Role.RoleName,
 					},
 					"token": token,
 				},

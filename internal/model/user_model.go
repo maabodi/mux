@@ -15,7 +15,7 @@ type User struct {
 	Email       string         `json:"email" form:"email"`
 	Password    string         `json:"password" form:"password"`
 	RoleId      int64          `json:"role"`
-	Role        Role           `json:"roles"`
+	Role        Role           `json:"-"`
 	UserProfile UserProfile    `json:"user_profile"`
 	Avatar      Avatar         `gorm:"constraint:OnUpdate:CASCADE,ONDELETE:SET NULL;" json:"avatar"`
 }
